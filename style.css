@@ -1,0 +1,80 @@
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.body {
+  width: 560px;
+  max-width: 100%;
+  padding: 0 15px;
+  font-family: "Inter", sans-serif;
+  font-size: 20px;
+  color: #151515;
+}
+
+.output {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  row-gap: 10px;
+  padding: 20px;
+  margin: 1px;
+  background-color: white;
+  border: 1px solid lightgray;
+}
+
+.first-screen {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  column-gap: 10px;
+  word-break: break-all;
+  min-height: 40px;
+  font-size: 32px;
+}
+
+.second-screen {
+  min-height: 50px;
+  font-size: 40px;
+  word-break: break-all;
+}
+
+.first-screen .operand {
+  font-size: 24px;
+}
+
+.first-row,
+.second-row,
+.thrid-row,
+.forth-row,
+.fifth-row {
+  display: flex;
+}
+
+button {
+  width: 100%;
+  padding: 15px;
+  margin: 1px;
+  font-size: 20px;
+  background-color: white;
+  outline: none;
+  border: 1px solid lightgray;
+  cursor: pointer;
+}
+
+button:active {
+  background-color: lightgray;
+}
