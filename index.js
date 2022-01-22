@@ -32,6 +32,30 @@ const updateOperand = (operandVal) => {
   operandScreen.innerHTML = operand;
 };
 
+const updateValue = () => {
+  switch (operand) {
+    case "+":
+      prev = Number(prev) + Number(current);
+      current = null;
+      break;
+
+    case "-":
+      prev = Number(prev) - Number(current);
+      current = null;
+      break;
+
+    case "*":
+      prev = Number(prev) * Number(current);
+      current = null;
+      break;
+
+    case "/":
+      prev = Number(prev) / Number(current);
+      current = null;
+      break;
+  }
+};
+
 // User clicks numbers
 const numberClick = (e) => {
   // Control when first value is 0
@@ -59,6 +83,7 @@ const numberClick = (e) => {
   }
 
   currentScreen.innerHTML = currentScreen.innerHTML + e.target.outerText;
+  current = currentScreen.innerHTML;
 };
 
 numbers.forEach((number) => {
@@ -68,6 +93,7 @@ numbers.forEach((number) => {
 // User clicks delete
 const delClick = () => {
   currentScreen.innerHTML = currentScreen.innerHTML.slice(0, currentScreen.innerHTML.length - 1);
+  current = currentScreen.innerHTML;
 };
 
 del.addEventListener("click", delClick);
@@ -80,36 +106,12 @@ const acClick = () => {
 
 ac.addEventListener("click", acClick);
 
-// User clicks operation
-const updateValue = () => {
-  switch (operand) {
-    case "+":
-      prev = Number(prev) + Number(currentScreen.innerHTML);
-      current = null;
-      break;
-
-    case "-":
-      prev = Number(prev) - Number(currentScreen.innerHTML);
-      current = null;
-      break;
-
-    case "*":
-      prev = Number(prev) * Number(currentScreen.innerHTML);
-      current = null;
-      break;
-
-    case "/":
-      prev = Number(prev) / Number(currentScreen.innerHTML);
-      current = null;
-      break;
-  }
-};
-
+// User clicks operation (-, +, *, /)
 const doOperation = (operandVal) => {
   if (prev === null) {
     updateOperand(operandVal);
-    updateScreen(currentScreen.innerHTML, null);
-  } else if (currentScreen.innerHTML === "") {
+    updateScreen(current, null);
+  } else if (current === null) {
     updateOperand(operandVal);
   } else {
     updateValue();
@@ -118,8 +120,11 @@ const doOperation = (operandVal) => {
   }
 };
 
+// User clicks equals
 const doEquals = () => {
   if (!operand && !prev) {
+    return;
+  } else if (!current) {
     return;
   } else {
     updateValue(operand);
@@ -135,9 +140,3 @@ mins.addEventListener("click", () => doOperation("-"));
 times.addEventListener("click", () => doOperation("*"));
 divides.addEventListener("click", () => doOperation("/"));
 equals.addEventListener("click", doEquals);
-
-window.state = {
-  prev: prev,
-  current: current,
-  operand: operand,
-};
