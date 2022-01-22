@@ -109,6 +109,8 @@ const doOperation = (operandVal) => {
   if (prev === null) {
     updateOperand(operandVal);
     updateScreen(currentScreen.innerHTML, null);
+  } else if (currentScreen.innerHTML === "") {
+    updateOperand(operandVal);
   } else {
     updateValue();
     updateScreen(prev, current);
