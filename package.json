@@ -11,7 +11,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "source": "index.html",
+  "source": "src/index.html",
   "browserslist": "Last 2 Chrome versions",
   "devDependencies": {
     "parcel": "^2.2.1"
