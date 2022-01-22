@@ -35,15 +35,21 @@ const updateOperand = (operandVal) => {
 
 // User clicks numbers
 const numberClick = (e) => {
-  if (e.target.innerHTML === ".") {
-    if (currentScreen.innerHTML.includes(".")) {
+  // Control when first value is 0
+  if (currentScreen.innerHTML && currentScreen.innerHTML[0].includes("0")) {
+    if (e.target.innerHTML === "0" && !currentScreen.innerHTML.includes(".")) {
       return;
-    } else {
-      currentScreen.innerHTML = currentScreen.innerHTML + e.target.outerText;
+    } else if (e.target.innerHTML !== "." && !currentScreen.innerHTML.includes(".")) {
+      currentScreen.innerHTML = currentScreen.innerHTML.substring(1);
     }
-  } else {
-    currentScreen.innerHTML = currentScreen.innerHTML + e.target.outerText;
   }
+
+  // To prevent double dots
+  if (e.target.innerHTML === "." && currentScreen.innerHTML.includes(".")) {
+    return;
+  }
+
+  currentScreen.innerHTML = currentScreen.innerHTML + e.target.outerText;
 };
 
 numbers.forEach((number) => {
@@ -52,10 +58,7 @@ numbers.forEach((number) => {
 
 // User clicks delete
 const delClick = () => {
-  currentScreen.innerHTML = currentScreen.innerHTML.slice(
-    0,
-    currentScreen.innerHTML.length - 1
-  );
+  currentScreen.innerHTML = currentScreen.innerHTML.slice(0, currentScreen.innerHTML.length - 1);
 };
 
 del.addEventListener("click", delClick);
