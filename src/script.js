@@ -12,6 +12,7 @@ const operandScreen = document.querySelector("[data-operand]");
 const numbers = Array.from(document.querySelectorAll("[data-numbers]"));
 const ac = document.querySelector("[data-ac]");
 const del = document.querySelector("[data-del]");
+const plusMinus = document.querySelector("[data-plus-minus]");
 const divides = document.querySelector("[data-divides]");
 const times = document.querySelector("[data-times]");
 const mins = document.querySelector("[data-mins]");
@@ -44,12 +45,12 @@ const updateValue = () => {
       current = null;
       break;
 
-    case "*":
+    case "×":
       prev = Number(prev) * Number(current);
       current = null;
       break;
 
-    case "/":
+    case "÷":
       prev = Number(prev) / Number(current);
       current = null;
       break;
@@ -135,8 +136,15 @@ const doEquals = () => {
   }
 };
 
+// User clicks plus-minus
+const doPlusMinus = () => {
+  currentScreen.innerHTML = -currentScreen.innerHTML;
+  current = currentScreen.innerHTML;
+};
+
 adds.addEventListener("click", () => doOperation("+"));
 mins.addEventListener("click", () => doOperation("-"));
-times.addEventListener("click", () => doOperation("*"));
-divides.addEventListener("click", () => doOperation("/"));
+times.addEventListener("click", () => doOperation("×"));
+divides.addEventListener("click", () => doOperation("÷"));
+plusMinus.addEventListener("click", doPlusMinus);
 equals.addEventListener("click", doEquals);
