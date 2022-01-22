@@ -17,7 +17,6 @@ const times = document.querySelector("[data-times]");
 const mins = document.querySelector("[data-mins]");
 const adds = document.querySelector("[data-adds]");
 const equals = document.querySelector("[data-equals]");
-// const dot = document.querySelector("[data-dot]");
 
 // General functions
 const updateScreen = (prevVal, currentVal) => {
@@ -38,15 +37,25 @@ const numberClick = (e) => {
   // Control when first value is 0
   if (currentScreen.innerHTML && currentScreen.innerHTML[0].includes("0")) {
     if (e.target.innerHTML === "0" && !currentScreen.innerHTML.includes(".")) {
+      // Prevent double zeros
       return;
     } else if (e.target.innerHTML !== "." && !currentScreen.innerHTML.includes(".")) {
+      // Remove zero at first value when it's not a decimal
       currentScreen.innerHTML = currentScreen.innerHTML.substring(1);
     }
   }
 
-  // To prevent double dots
-  if (e.target.innerHTML === "." && currentScreen.innerHTML.includes(".")) {
-    return;
+  // Control dot
+  if (e.target.innerHTML === ".") {
+    // Prevent double dots
+    if (currentScreen.innerHTML.includes(".")) {
+      return;
+    }
+
+    // Give zero when typing first dot
+    if (!currentScreen.innerHTML) {
+      currentScreen.innerHTML = "0";
+    }
   }
 
   currentScreen.innerHTML = currentScreen.innerHTML + e.target.outerText;
