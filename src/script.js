@@ -57,6 +57,13 @@ const updateValue = () => {
   }
 };
 
+const updateNumberWithCommas = (numbers) => {
+  var parts = numbers.toString().split(".");
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return parts.join(".");
+};
+let akuada;
+
 // User clicks numbers
 const numberClick = (e) => {
   // Control when first value is 0
@@ -70,7 +77,7 @@ const numberClick = (e) => {
     }
   }
 
-  // Control dot
+  // Control button dot
   if (e.target.innerHTML === ".") {
     // Prevent double dots
     if (currentScreen.innerHTML.includes(".")) {
@@ -82,9 +89,17 @@ const numberClick = (e) => {
       currentScreen.innerHTML = "0";
     }
   }
+  // Control when user types a number
+  if (e.target.innerHTML === "000" && !currentScreen.innerHTML) {
+    // Prevent triple zeros at first value
+    currentScreen.innerHTML = "0";
+  } else {
+    let originalValue = (currentScreen.innerHTML + e.target.outerText).split(",").join("");
+    currentScreen.innerHTML = updateNumberWithCommas(originalValue);
+  }
 
-  currentScreen.innerHTML = currentScreen.innerHTML + e.target.outerText;
-  current = currentScreen.innerHTML;
+  // !TODO -> Handle triple zeros commas for = and prev
+  current = currentScreen.innerHTML.split(",").join("");
 };
 
 numbers.forEach((number) => {
