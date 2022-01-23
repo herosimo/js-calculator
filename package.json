@@ -14,6 +14,7 @@
   "source": "src/index.html",
   "browserslist": "Last 2 Chrome versions",
   "devDependencies": {
+    "@parcel/transformer-sass": "^2.2.1",
     "parcel": "^2.2.1"
   }
 }

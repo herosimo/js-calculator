@@ -4,51 +4,61 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.scss" />
     <title>JS Calculator</title>
   </head>
   <body>
     <div class="body">
       <div class="output">
-        <div class="first-screen">
+        <div class="output-first-row">
           <span data-previous class="previous"></span>
           <span data-operand class="operand"></span>
         </div>
-        <div class="second-screen">
+        <div class="output-second-row">
           <span data-current class="current"></span>
         </div>
       </div>
       <div class="input">
-        <div class="first-row">
-          <button data-ac class="ac">AC</button>
-          <button data-del class="del">DEL</button>
-          <button data-plus-minus>±</button>
+        <div class="input-row">
+          <button data-ac class="btn-tool">AC</button>
+          <button data-del class="btn-tool">⌫</button>
+          <button data-plus-minus class="btn-tool">⁺∕₋</button>
+          <button data-divides class="btn-operation">÷</button>
         </div>
-        <div class="second-row">
+        <div class="input-row">
           <button data-numbers>7</button>
           <button data-numbers>8</button>
           <button data-numbers>9</button>
-          <button data-divides>÷</button>
+          <button data-times class="btn-operation">×</button>
         </div>
-        <div class="thrid-row">
+        <div class="input-row">
           <button data-numbers>4</button>
           <button data-numbers>5</button>
           <button data-numbers>6</button>
-          <button data-times>×</button>
+          <button data-mins class="btn-operation">-</button>
         </div>
-        <div class="forth-row">
+        <div class="input-row">
           <button data-numbers>1</button>
           <button data-numbers>2</button>
           <button data-numbers>3</button>
-          <button data-mins>-</button>
+          <button data-adds class="btn-operation">+</button>
         </div>
-        <div class="fifth-row">
+        <div class="input-row">
           <button data-numbers>.</button>
           <button data-numbers>0</button>
-          <button data-equals>=</button>
-          <button data-adds>+</button>
+          <button data-numbers>000</button>
+          <button data-equals class="btn-operation">=</button>
         </div>
       </div>
+      <div class="divider"></div>
     </div>
 
     <script src="script.js"></script>
