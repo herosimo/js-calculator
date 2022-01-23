@@ -109,10 +109,14 @@ ac.addEventListener("click", acClick);
 
 // User clicks operation (-, +, *, /)
 const doOperation = (operandVal) => {
-  if (prev === null) {
+  if (!current && !prev) {
+    return;
+  }
+
+  if (!prev) {
     updateOperand(operandVal);
     updateScreen(current, null);
-  } else if (current === null) {
+  } else if (!current) {
     updateOperand(operandVal);
   } else {
     updateValue();
@@ -125,19 +129,25 @@ const doOperation = (operandVal) => {
 const doEquals = () => {
   if (!operand && !prev) {
     return;
-  } else if (!current) {
-    return;
-  } else {
-    updateValue(operand);
-    current = prev;
-    prev = null;
-    updateOperand(null);
-    updateScreen(prev, current);
   }
+
+  if (!current) {
+    return;
+  }
+
+  updateValue(operand);
+  current = prev;
+  prev = null;
+  updateOperand(null);
+  updateScreen(prev, current);
 };
 
 // User clicks plus-minus
 const doPlusMinus = () => {
+  if (!current) {
+    return;
+  }
+
   currentScreen.innerHTML = -currentScreen.innerHTML;
   current = currentScreen.innerHTML;
 };
