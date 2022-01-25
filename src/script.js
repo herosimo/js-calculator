@@ -30,7 +30,7 @@ const updateNumberToOriginalValue = (numbers) => {
   return numbers.split(",").join("");
 };
 
-const updateScreen = (prevVal, currentVal) => {
+const updateScreen = (prevVal = null, currentVal = null) => {
   prev = prevVal;
   current = currentVal;
 
@@ -97,7 +97,7 @@ const numberClick = (e) => {
     // Prevent triple zeros at first value
     currentScreen.innerHTML = "0";
   } else {
-    currentScreen.innerHTML = currentScreen.innerHTML + e.target.outerText;
+    updateScreen(prev, currentScreen.innerHTML + e.target.outerText);
   }
 
   // !TODO -> Handle triple zeros commas for = and prev
@@ -110,7 +110,7 @@ numbers.forEach((number) => {
 
 // User clicks delete
 const delClick = () => {
-  currentScreen.innerHTML = currentScreen.innerHTML.slice(0, currentScreen.innerHTML.length - 1);
+  updateScreen(prev, currentScreen.innerHTML.slice(0, currentScreen.innerHTML.length - 1));
   current = currentScreen.innerHTML;
 };
 
@@ -165,7 +165,7 @@ const doPlusMinus = () => {
     return;
   }
 
-  currentScreen.innerHTML = -currentScreen.innerHTML;
+  updateScreen(prev, -currentScreen.innerHTML);
   current = currentScreen.innerHTML;
 };
 
