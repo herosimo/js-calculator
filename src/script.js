@@ -20,22 +20,32 @@ const adds = document.querySelector("[data-adds]");
 const equals = document.querySelector("[data-equals]");
 
 // General functions
+// Create commas after finding 3 values
 const updateNumberWithCommas = (numbers) => {
-  var parts = numbers.toString().split(".");
-  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  return parts.join(".");
+  if (numbers) {
+    var parts = numbers.toString().split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return parts.join(".");
+  } else {
+    return numbers;
+  }
 };
 
+// Remove the commas
 const updateNumberToOriginalValue = (numbers) => {
-  return numbers.split(",").join("");
+  if (numbers) {
+    return numbers.toString().split(",").join("");
+  } else {
+    return numbers;
+  }
 };
 
-const updateScreen = (prevVal = null, currentVal = null) => {
-  prev = prevVal;
-  current = currentVal;
+const updateScreen = (prevVal, currentVal) => {
+  prev = updateNumberToOriginalValue(prevVal);
+  current = updateNumberToOriginalValue(currentVal);
 
-  prevScreen.innerHTML = prev;
-  currentScreen.innerHTML = current;
+  prevScreen.innerHTML = updateNumberWithCommas(prev);
+  currentScreen.innerHTML = updateNumberWithCommas(current);
 };
 
 const updateOperand = (operandVal) => {
@@ -46,22 +56,26 @@ const updateOperand = (operandVal) => {
 const updateValue = () => {
   switch (operand) {
     case "+":
-      prev = Number(prev) + Number(current);
+      prev =
+        Number(updateNumberToOriginalValue(prev)) + Number(updateNumberToOriginalValue(current));
       current = null;
       break;
 
     case "-":
-      prev = Number(prev) - Number(current);
+      prev =
+        Number(updateNumberToOriginalValue(prev)) - Number(updateNumberToOriginalValue(current));
       current = null;
       break;
 
     case "×":
-      prev = Number(prev) * Number(current);
+      prev =
+        Number(updateNumberToOriginalValue(prev)) * Number(updateNumberToOriginalValue(current));
       current = null;
       break;
 
     case "÷":
-      prev = Number(prev) / Number(current);
+      prev =
+        Number(updateNumberToOriginalValue(prev)) / Number(updateNumberToOriginalValue(current));
       current = null;
       break;
   }
@@ -99,9 +113,6 @@ const numberClick = (e) => {
   } else {
     updateScreen(prev, currentScreen.innerHTML + e.target.outerText);
   }
-
-  // !TODO -> Handle triple zeros commas for = and prev
-  current = currentScreen.innerHTML;
 };
 
 numbers.forEach((number) => {
@@ -111,7 +122,6 @@ numbers.forEach((number) => {
 // User clicks delete
 const delClick = () => {
   updateScreen(prev, currentScreen.innerHTML.slice(0, currentScreen.innerHTML.length - 1));
-  current = currentScreen.innerHTML;
 };
 
 del.addEventListener("click", delClick);
@@ -165,8 +175,7 @@ const doPlusMinus = () => {
     return;
   }
 
-  updateScreen(prev, -currentScreen.innerHTML);
-  current = currentScreen.innerHTML;
+  updateScreen(prev, -Number(updateNumberToOriginalValue(currentScreen.innerHTML)));
 };
 
 adds.addEventListener("click", () => doOperation("+"));
