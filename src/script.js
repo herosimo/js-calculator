@@ -20,6 +20,16 @@ const adds = document.querySelector("[data-adds]");
 const equals = document.querySelector("[data-equals]");
 
 // General functions
+const updateNumberWithCommas = (numbers) => {
+  var parts = numbers.toString().split(".");
+  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return parts.join(".");
+};
+
+const updateNumberToOriginalValue = (numbers) => {
+  return numbers.split(",").join("");
+};
+
 const updateScreen = (prevVal, currentVal) => {
   prev = prevVal;
   current = currentVal;
@@ -57,13 +67,6 @@ const updateValue = () => {
   }
 };
 
-const updateNumberWithCommas = (numbers) => {
-  var parts = numbers.toString().split(".");
-  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-  return parts.join(".");
-};
-let akuada;
-
 // User clicks numbers
 const numberClick = (e) => {
   // Control when first value is 0
@@ -94,12 +97,11 @@ const numberClick = (e) => {
     // Prevent triple zeros at first value
     currentScreen.innerHTML = "0";
   } else {
-    let originalValue = (currentScreen.innerHTML + e.target.outerText).split(",").join("");
-    currentScreen.innerHTML = updateNumberWithCommas(originalValue);
+    currentScreen.innerHTML = currentScreen.innerHTML + e.target.outerText;
   }
 
   // !TODO -> Handle triple zeros commas for = and prev
-  current = currentScreen.innerHTML.split(",").join("");
+  current = currentScreen.innerHTML;
 };
 
 numbers.forEach((number) => {
