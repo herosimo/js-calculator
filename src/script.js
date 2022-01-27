@@ -136,7 +136,7 @@ ac.addEventListener("click", acClick);
 
 // User clicks operation (-, +, *, /)
 const doOperation = (operandVal) => {
-  if (!current && !prev) {
+  if (!current && current !== 0 && !prev) {
     return;
   }
 
