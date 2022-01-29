@@ -48,12 +48,14 @@ body {
     display: flex;
     justify-content: end;
     align-items: center;
-    column-gap: 8px;
+    margin-left: auto;
+    // column-gap: 8px;
     min-height: 28px;
     font-size: 24px;
     color: #36383cbf;
 
     .operand {
+      margin-left: 8px;
       font-size: 20px;
     }
   }
@@ -61,6 +63,7 @@ body {
   &-second-row {
     display: flex;
     justify-content: end;
+    margin-left: auto;
     min-height: 38px;
     font-size: 32px;
     color: #36383c;
@@ -70,11 +73,11 @@ body {
 .input {
   display: flex;
   flex-direction: column;
-  row-gap: 10px;
+  // row-gap: 10px;
 
   &-row {
     display: flex;
-    column-gap: 10px;
+    // column-gap: 10px;
 
     button {
       max-width: 100%;
@@ -82,9 +85,13 @@ body {
       height: 60px;
 
       padding: 10px;
-      margin: 0px;
       border-radius: 15px;
       box-shadow: 1px 1px 8px 0px rgba(20, 20, 20, 1), -1px 1px 8px 0px rgba(70, 70, 70, 1);
+      margin-right: 10px;
+      margin-bottom: 10px;
+      &:last-child {
+        margin-right: 0px;
+      }
 
       background-color: #36383c;
       color: #a7abae;
@@ -114,7 +121,7 @@ body {
 
 .divider {
   display: inline-block;
-  margin-top: 30px;
+  margin-top: 20px;
   width: 50px;
   height: 5px;
   background-color: #a7abae;
