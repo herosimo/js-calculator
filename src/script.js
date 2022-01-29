@@ -111,7 +111,7 @@ const numberClick = (e) => {
     // Prevent triple zeros at first value
     currentScreen.innerHTML = "0";
   } else {
-    updateScreen(prev, currentScreen.innerHTML + e.target.outerText);
+    updateScreen(prev, currentScreen.innerHTML + e.target.innerHTML);
   }
 };
 
