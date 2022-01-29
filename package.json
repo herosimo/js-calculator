@@ -2,19 +2,23 @@
   "name": "js-calculator",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
     "start": "parcel",
-    "build": "parcel build",
+    "build:parcel": "parcel build ./src/index.html --public-url ./",
+    "clean": "rm -rf dist/*",
+    "build": "npm run clean && npm run build:parcel",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "source": "src/index.html",
-  "browserslist": "Last 2 Chrome versions",
+  "browserslist": "defaults",
   "devDependencies": {
     "@parcel/transformer-sass": "^2.2.1",
+    "gh-pages": "^3.2.3",
     "parcel": "^2.2.1"
   }
 }
